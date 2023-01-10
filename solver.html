@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solver</title>
+</head>
+<body>
+    <div>
+        <label for="m">m [kg]</label>
+        <input name="m" type="number" step="0.01" value="20"/>
+    </div>
+    <div>
+        <label for="T">T [h]</label>
+        <input name="T" type="number" step="0.01" value="2.4"/>
+    </div>
+    <div>
+        <label for="r">r [m]</label>
+        <input name="r" type="number" step="0.01" value="8000000"/>
+    </div>
+    <div>
+        <label for="g">g [m/s<sup>2</sup>]</label>
+        <input name="g" type="number" step="0.01" value="8"/>
+    </div>
+    <br/>
+    <button onclick="solve()">Solve</button>
+    <h3>R = <span id="R"></span></h3>
+
+    <script>
+        function getValue(name) {
+            const elements = document.getElementsByName(name)
+            const value = elements[0].value
+            return parseFloat(value)
+        }
+
+        function displayResult(value) {
+            const element = document.getElementById('R')
+            element.innerText = value
+        }
+
+        function solve() {
+            console.log('solve')
+            
+            const m = getValue('m')
+            const T = getValue('T') * 60 * 60  // h -> s
+            const r = getValue('r')
+            const g = getValue('g')
+
+            console.log(m, T, r, g)
+
+            const R = 2 * Math.PI * r * Math.sqrt(r/g) / T
+
+            displayResult(R)
+        }
+    </script>
+</body>
+</html>
